@@ -28,7 +28,7 @@ class BuildIssuesListViewItem extends StatelessWidget {
           children: [
             Text(
               '${issue?.title}',
-              style: textTheme.headline6,
+              //   style: textTheme.headline6,
             ),
             const SizedBox(height: 10.0),
             Row(
@@ -39,7 +39,7 @@ class BuildIssuesListViewItem extends StatelessWidget {
                   child: Text(
                     HelperFormat.formattedCreatedDate(issue?.createdAt ?? '') ??
                         '',
-                    style: textTheme.bodyText2,
+                    //  style: textTheme.bodyText2,
                   ),
                 ),
                 Text(

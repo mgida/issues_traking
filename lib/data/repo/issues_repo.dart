@@ -11,4 +11,25 @@ class IssuesRepo {
       String state, int perPage, int page) async {
     return await issuesService.getAllIssues(state, perPage, page);
   }
+
+  Future<Response<List<IssuesResult>>> getOldestIssues(
+      String state, String direction, int perPage, int page) async {
+    return await issuesService.getOldestIssues(state, direction, perPage, page);
+  }
+
+  Future<Response<List<IssuesResult>>> getRecentlyUpdatedIssues(String state,
+      String sort, String direction, int perPage, int page) async {
+    return await issuesService.getRecentlyUpdatedIssues(
+        state, sort, direction, perPage, page);
+  }
+
+  Future<Response<List<IssuesResult>>> getLeastRecentlyUpdatedIssues(
+      String state,
+      String sort,
+      String direction,
+      int perPage,
+      int page) async {
+    return await issuesService.getLeastRecentlyUpdatedIssues(
+        state, sort, direction, perPage, page);
+  }
 }

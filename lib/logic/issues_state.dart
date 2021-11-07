@@ -23,3 +23,5 @@ class AllIssuesLoaded extends IssuesState {
 
   AllIssuesLoaded({required this.issues});
 }
+
+class AppChangeBottomNavBr extends IssuesState {}

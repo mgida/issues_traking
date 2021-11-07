@@ -9,6 +9,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:tasks/data/rest/issues_service.dart';
 import 'package:tasks/logic/internet_cubit.dart';
 import 'package:tasks/logic/issues_cubit.dart';
+import 'package:tasks/logic/least_recently_updated_issues_cubit.dart';
+import 'package:tasks/logic/old_issues_cubit.dart';
+import 'package:tasks/logic/recently_updated_issues_cubit.dart';
 import 'package:tasks/logic/theme_cubit.dart';
 import 'package:tasks/presentation/screens/issues_screen.dart';
 import 'package:tasks/utils/constants.dart';
@@ -43,7 +46,22 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => IssuesCubit(userRepo: _issuesRepo),
+          create: (BuildContext context) =>
+              IssuesCubit(userRepo: _issuesRepo)..getAllIssues('all'),
+        ),
+        BlocProvider(
+          create: (BuildContext context) =>
+              OldIssuesCubit(userRepo: _issuesRepo)..getOldestIssues('all'),
+        ),
+        BlocProvider(
+          create: (BuildContext context) =>
+              RecentlyUpdatedIssuesCubit(userRepo: _issuesRepo)
+                ..getRecentlyUpdatedIssues('all'),
+        ),
+        BlocProvider(
+          create: (BuildContext context) =>
+              LeastRecentlyUpdatedIssuesCubit(userRepo: _issuesRepo)
+                ..getLeastRecentlyUpdatedIssues('all'),
         ),
         BlocProvider(
           create: (BuildContext context) => InternetCubit(
@@ -64,10 +82,17 @@ class MyApp extends StatelessWidget {
                   headline6: kNewsCycleFont,
                 ),
                 textTheme: kTextTheme),
-            darkTheme: ThemeData.dark(),
+            darkTheme: ThemeData.dark().copyWith(
+              primaryTextTheme: TextTheme(
+                headline6: kNewsCycleFont,
+              ),
+              tabBarTheme: const TabBarTheme(
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.white70),
+            ),
             themeMode: state ? ThemeMode.dark : ThemeMode.light,
             debugShowCheckedModeBanner: false,
-            home: IssuesScreen(),
+            home: const IssuesScreen(),
           );
         },
       ),

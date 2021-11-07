@@ -18,10 +18,58 @@ class _$IssuesService extends IssuesService {
 
   @override
   Future<Response<List<IssuesResult>>> getAllIssues(
-      String state, int perPage, int page) {
+      String state,int perPage, int page) {
     final $url = 'repos/flutter/flutter/issues';
     final $params = <String, dynamic>{
       'state': state,
+      'per_page': perPage,
+      'page': page
+    };
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<List<IssuesResult>, IssuesResult>($request);
+  }
+
+  @override
+  Future<Response<List<IssuesResult>>> getOldestIssues(
+      String state, String direction,int perPage, int page) {
+    final $url = 'repos/flutter/flutter/issues';
+    final $params = <String, dynamic>{
+      'state': state,
+      'direction': direction,
+      'per_page': perPage,
+      'page': page
+    };
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<List<IssuesResult>, IssuesResult>($request);
+  }
+
+  @override
+  Future<Response<List<IssuesResult>>> getRecentlyUpdatedIssues(String state,
+      String sort, String direction, int perPage, int page) {
+    final $url = 'repos/flutter/flutter/issues';
+    final $params = <String, dynamic>{
+      'state': state,
+      'sort': sort,
+      'direction': direction,
+      'per_page': perPage,
+      'page': page
+    };
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<List<IssuesResult>, IssuesResult>($request);
+  }
+
+  @override
+  Future<Response<List<IssuesResult>>> getLeastRecentlyUpdatedIssues(
+      String state,
+      String sort,
+      String direction,
+      int perPage,
+      int page) {
+    final $url = 'repos/flutter/flutter/issues';
+    final $params = <String, dynamic>{
+      'state': state,
+      'sort': sort,
+      'direction': direction,
       'per_page': perPage,
       'page': page
     };

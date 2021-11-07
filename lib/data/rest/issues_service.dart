@@ -13,6 +13,32 @@ abstract class IssuesService extends ChopperService {
     @Query('page') int page,
   );
 
+  @Get(path: 'repos/flutter/flutter/issues')
+  Future<Response<List<IssuesResult>>> getOldestIssues(
+    @Query('state') String state,
+    @Query('direction') String direction,
+    @Query('per_page') int perPage,
+    @Query('page') int page,
+  );
+
+  @Get(path: 'repos/flutter/flutter/issues')
+  Future<Response<List<IssuesResult>>> getRecentlyUpdatedIssues(
+    @Query('state') String state,
+    @Query('sort') String sort,
+    @Query('direction') String direction,
+    @Query('per_page') int perPage,
+    @Query('page') int page,
+  );
+
+  @Get(path: 'repos/flutter/flutter/issues')
+  Future<Response<List<IssuesResult>>> getLeastRecentlyUpdatedIssues(
+    @Query('state') String state,
+    @Query('sort') String sort,
+    @Query('direction') String direction,
+    @Query('per_page') int perPage,
+    @Query('page') int page,
+  );
+
   static IssuesService create() {
     final client = ChopperClient(
       baseUrl: 'https://api.github.com',
